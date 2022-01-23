@@ -1,0 +1,52 @@
+application:
+  bucket:
+    name: demobucketdk
+  topic:
+    name: CISTopic
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA336AJHCPZMBUTKFP
+      secret-key: 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
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+server:
+  port: 8083
+spring:
+  datasource:
+    username: admin
+    password: admin1234
+    url: jdbc:mariadb://demodatabase-instance-1.c54cksymd95h.us-east-1.rds.amazonaws.com:3306/demo_schema
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+  kafka:
+    bootstrap-servers: b-1.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094,b-3.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094,b-2.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: b-1.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094,b-3.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094,b-2.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094
+      group-id: cis
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: b-1.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094,b-3.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094,b-2.demo-cluster-1.yphti9.c21.kafka.us-east-1.amazonaws.com:9094
+      group-id: cis
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    security:
+      protocol: SSL
+    ssl:
+      truststore:
+        location: /tmp/kafka.client.truststore.jks
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 5MB
+      max-request-size: 10MB
